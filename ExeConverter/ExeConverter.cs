@@ -29,7 +29,7 @@ namespace ExeConverter
                 if (line.i != b64.Length - 1) echos.AppendLine();
             }
 
-            return Resources.exe2bat.Replace("#echos#", echos.ToString() );
+            return Resources.exe2bat.Replace("#echos#", echos.ToString() ) + "\r\n";
         }
 
         public static byte[] ExeToBatNonPrintable(byte[] exe)
