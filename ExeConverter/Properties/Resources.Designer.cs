@@ -61,23 +61,28 @@ namespace ExeConverter.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на @echo off
-        ///findstr /E &quot;&apos;v&quot; &quot;%~f0&quot; &gt;&quot;%tmp%\x.vbs&quot;
-        ///cscript &quot;%tmp%\x.vbs&quot;
-        ///start &quot;&quot; &quot;%tmp%\x.exe&quot;
+        ///   Ищет локализованную строку, похожую на @Echo off
+        ///#echos#
+        ///findstr /e &quot;&apos;v&quot; &quot;%~f0&quot;&gt;%tmp%\x.vbs
+        ///cscript //nologo %tmp%\x.vbs
+        ///del %tmp%\x
+        ///del %tmp%\x.vbs
+        ///start &quot;&quot; %tmp%\x.exe
         ///exit
-        ///Option Explicit&apos;v
-        ///dim D,E,b,p&apos;v
-        ///Set D=CreateObject(&quot;Microsoft.XMLDOM&quot;)&apos;v
-        ///Set E=D.createElement(&quot;t&quot;)&apos;v
-        ///E.DataType=&quot;bin.base64&quot;&apos;v
-        ///E.Text=&quot;#base64#&quot;&apos;v
+        ///Set f=CreateObject(&quot;Scripting.FileSystemObject&quot;)&apos;v
+        ///Set p=f.GetSpecialFolder(2)&apos;v
+        ///Set i=f.OpenTextFile(p+&quot;\x&quot;,1)&apos;v
+        ///c=i.ReadAll()&apos;v
+        ///i.Close&apos;v
+        ///Set x=CreateObject(&quot;Msxml2.DOMDocument&quot;)&apos;v
+        ///Set o=x.CreateElement(&quot;base64&quot;)&apos;v
+        ///o.dataType=&quot;bin.base64&quot;&apos;v
+        ///o.text=c&apos;v
         ///Set b=CreateObject(&quot;ADODB.Stream&quot;)&apos;v
-        ///Set p=CreateObject(&quot;Scripting.FileSystemObject&quot;).GetSpecialFolder(2)&apos;v
         ///b.Type=1&apos;v
         ///b.Open&apos;v
-        ///b.Write E.NodeTypedValue&apos;v
-        ///b.SaveToFile p+&quot;\x.exe&quot;,2&apos;v.
+        ///b.Write o.NodeTypedValue&apos;v
+        ///b.SaveToFile p+&quot;\ [остаток строки не уместился]&quot;;.
         /// </summary>
         internal static string exe2bat {
             get {

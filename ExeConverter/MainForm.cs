@@ -59,33 +59,38 @@ namespace ExeConverter
             if (infile is null) return;
             byte[] input = File.ReadAllBytes(infile);
             
-            string output = "";
+            byte[] output = new byte[0];
             string outtype = "";
 
             if (cmbFormats.SelectedIndex == 0)
             {
-                output = ExeConverter.ExeToBat(input);
+                output = Encoding.UTF8.GetBytes(ExeConverter.ExeToBat(input) );
                 outtype = "*.bat";
             }
             else if (cmbFormats.SelectedIndex == 1)
             {
-                output = ExeConverter.ExeToVbs(input);
-                outtype = "*.vbs";
+                output = ExeConverter.ExeToBatNonPrintable(input);
+                outtype = "*.bat";
             }
             else if (cmbFormats.SelectedIndex == 2)
             {
-                output = ExeConverter.ExeToJs(input);
-                outtype = "*.js";
+                output = Encoding.UTF8.GetBytes(ExeConverter.ExeToVbs(input) );
+                outtype = "*.vbs";
             }
             else if (cmbFormats.SelectedIndex == 3)
             {
-                output = ExeConverter.ExeToPs1(input);
+                output = Encoding.UTF8.GetBytes(ExeConverter.ExeToJs(input) );
+                outtype = "*.js";
+            }
+            else if (cmbFormats.SelectedIndex == 4)
+            {
+                output = Encoding.UTF8.GetBytes(ExeConverter.ExeToPs1(input) );
                 outtype = "*.ps1";
             }
 
             string outfile = SaveFile(outtype);
             if (outfile is null) return;
-            File.WriteAllText(outfile, output);
+            File.WriteAllBytes(outfile, output);
         }
     }
 }

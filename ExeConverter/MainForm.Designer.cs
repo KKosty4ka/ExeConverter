@@ -38,6 +38,7 @@ namespace ExeConverter
             this.cmbFormats.FormattingEnabled = true;
             this.cmbFormats.Items.AddRange(new object[] {
             "exe -> bat",
+            "exe -> bat (with non-printable chars)",
             "exe -> vbs",
             "exe -> js",
             "exe -> ps1"});
